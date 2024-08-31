@@ -1,0 +1,75 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Product {
+  product_id: Float!
+  name: String!
+  description: String!
+  price: Float!
+}
+
+type Order {
+  order_id: Float!
+  order_date: DateTime!
+  status: String!
+  customer: Customer
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Customer {
+  customer_id: Float!
+  address: String!
+  first_name: String!
+  last_name: String!
+  email: String!
+  phone: String!
+  orders: [Order!]!
+}
+
+type Query {
+  getCustomers: [Customer!]!
+  getOrders: [Order!]!
+  getProducts: [Product!]!
+}
+
+type Mutation {
+  createCustomer(input: CreateCustomerDto!): Customer!
+  updateCustomer(customer_id: Float!, input: CreateCustomerDto!): Customer!
+  deleteCustomer(customer_id: Float!): Boolean!
+  createOrder(input: CreateOrderDto!): Order!
+  updateOrder(order_id: Float!, input: UpdateOrderDto!): Order!
+  deleteOrder(order_id: Float!): Boolean!
+  createProduct(input: CreateProductDto!): Product!
+  updateProduct(product_id: Float!, input: CreateProductDto!): Product!
+  deleteProduct(product_id: Float!): Boolean!
+}
+
+input CreateCustomerDto {
+  address: String!
+  first_name: String!
+  last_name: String!
+  email: String!
+  phone: String!
+}
+
+input CreateOrderDto {
+  order_date: DateTime!
+  status: String!
+  customer_id: Float!
+}
+
+input UpdateOrderDto {
+  status: String
+  order_date: DateTime
+}
+
+input CreateProductDto {
+  name: String!
+  description: String!
+  price: Float!
+}

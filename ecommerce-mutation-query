@@ -1,0 +1,109 @@
+mutation {
+  createCustomer(input: {
+    address: "123 Elm Street",
+    first_name: "John",
+    last_name: "Doe",
+    email: "john.doe@example.com",
+    phone: "123-456-7890"
+  }) {
+    customer_id
+    first_name
+    last_name
+    email
+    phone
+    address
+  }
+}
+------------update customer-------
+// Add this decorator
+mutation {
+  updateCustomer(customer_id: 1, input: {
+    address: "456 Oak Avenue",
+    first_name: "John",
+    last_name: "Doe",
+    email: "john.doe@newexample.com",
+    phone: "987-654-3210"
+  }) {
+    customer_id
+    first_name
+    last_name
+    email
+    phone
+    address
+  }
+}
+================
+mutation {
+  deleteCustomer(customer_id: 1) {
+    success
+    message
+  }
+}
+===========
+mutation {
+  createOrder(input: {
+    order_date: "2023-10-10T00:00:00Z",
+    status: "Pending",
+    customer_id: 1
+  }) {
+    order_id
+    order_date
+    status
+    customer {
+      customer_id
+      first_name
+      last_name
+    }
+  }
+}
+
+============
+mutation {
+  updateOrder(order_id: 1, input: {
+    status: "Completed"
+  }) {
+    order_id
+    order_date
+    status
+  }
+  
+  ===========
+  mutation {
+  createProduct(input: {
+    name: "New Product",
+    description: "This is a description of the new product.",
+    price: 19.99
+  }) {
+    product_id
+    name
+    description
+    price
+  }
+}
+}
+
+==============
+mutation {
+  updateProduct(product_id: 1, input: {
+    name: "Updated Product",
+    description: "This is an updated description.",
+    price: 24.99
+  }) {
+    product_id
+    name
+    description
+    price
+  }
+}
+
+=================
+query {
+  getCustomers {
+    customer_id
+    email
+    first_name
+    last_name
+    address
+    phone
+  }
+}
