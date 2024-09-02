@@ -6,10 +6,13 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
   OneToMany,
-} from 'typeorm';
-import { ObjectType, Field } from '@nestjs/graphql';
-import { Customer } from '../../customer/entities/customer.entity';
-import { OrderProduct } from '../../order-product/entities/order-product.entity';
+  ManyToMany,
+  JoinTable,
+} from "typeorm";
+import { ObjectType, Field } from "@nestjs/graphql";
+import { Customer } from "../../customer/entities/customer.entity";
+import { OrderProduct } from "../../order-product/entities/order-product.entity";
+import { Product } from "src/product/entities/product.entity";
 
 @ObjectType()
 @Entity()
@@ -19,16 +22,19 @@ export class Order {
   order_id: number;
 
   @Field()
-  @Column('timestamp')
+  @Column("timestamp")
   order_date: Date;
 
   @Field()
-  @Column({ type: 'varchar' })
+  @Column({ type: "varchar" })
   status: string;
 
-  @Field(() => Customer, { nullable: true }) // Make the customer field nullable
+  @Field(() => Customer)
   @ManyToOne(() => Customer, (customer) => customer.orders)
   customer: Customer;
-  @OneToMany(() => OrderProduct, (orderProduct) => orderProduct.order)
-  orderProducts: OrderProduct[];
+
+  @Field(() => [Product])
+  @ManyToMany(() => Product, (product) => product.orders)
+  @JoinTable()
+  products: Product[];
 }

@@ -41,10 +41,20 @@ mutation {
 }
 ===========
 mutation {
-  createOrder(input: {
+  createOrder(createOrderDto: {
     order_date: "2023-10-10T00:00:00Z",
-    status: "Pending",
-    customer_id: 1
+    status: "Complete",
+    customer_id: 1,
+      products: [
+      {
+        product_id: 3,
+        quantity: 4
+      },
+      {
+        product_id: 4,
+        quantity: 3
+      }
+    ]
   }) {
     order_id
     order_date

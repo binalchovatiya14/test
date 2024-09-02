@@ -1,8 +1,8 @@
 // src/customer/customer.entity.ts
 
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
-import { ObjectType, Field } from '@nestjs/graphql';
-import { Order } from '../../order/entities/order.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
+import { ObjectType, Field } from "@nestjs/graphql";
+import { Order } from "../../order/entities/order.entity";
 
 @ObjectType()
 @Entity()
@@ -12,26 +12,26 @@ export class Customer {
   customer_id: number;
 
   @Field()
-  @Column('text')
+  @Column("text")
   address: string;
 
   @Field()
-  @Column({ type: 'varchar', length: 100 })
+  @Column({ type: "varchar", length: 100 })
   first_name: string;
 
   @Field()
-  @Column({ type: 'varchar', length: 100 })
+  @Column({ type: "varchar", length: 100 })
   last_name: string;
 
   @Field()
-  @Column({ type: 'varchar', unique: true })
+  @Column({ type: "varchar", unique: true })
   email: string;
 
   @Field()
-  @Column({ type: 'varchar', length: 15 })
+  @Column({ type: "varchar", length: 15 })
   phone: string;
 
-  @Field(() => [Order]) // Expose the orders field in GraphQL
+  @Field(() => [Order]) // Expose the orders relation
   @OneToMany(() => Order, (order) => order.customer)
   orders: Order[];
 }

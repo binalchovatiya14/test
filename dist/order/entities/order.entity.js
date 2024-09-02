@@ -13,7 +13,7 @@ exports.Order = void 0;
 const typeorm_1 = require("typeorm");
 const graphql_1 = require("@nestjs/graphql");
 const customer_entity_1 = require("../../customer/entities/customer.entity");
-const order_product_entity_1 = require("../../order-product/entities/order-product.entity");
+const product_entity_1 = require("../../product/entities/product.entity");
 let Order = class Order {
 };
 exports.Order = Order;
@@ -24,23 +24,25 @@ __decorate([
 ], Order.prototype, "order_id", void 0);
 __decorate([
     (0, graphql_1.Field)(),
-    (0, typeorm_1.Column)('timestamp'),
+    (0, typeorm_1.Column)("timestamp"),
     __metadata("design:type", Date)
 ], Order.prototype, "order_date", void 0);
 __decorate([
     (0, graphql_1.Field)(),
-    (0, typeorm_1.Column)({ type: 'varchar' }),
+    (0, typeorm_1.Column)({ type: "varchar" }),
     __metadata("design:type", String)
 ], Order.prototype, "status", void 0);
 __decorate([
-    (0, graphql_1.Field)(() => customer_entity_1.Customer, { nullable: true }),
+    (0, graphql_1.Field)(() => customer_entity_1.Customer),
     (0, typeorm_1.ManyToOne)(() => customer_entity_1.Customer, (customer) => customer.orders),
     __metadata("design:type", customer_entity_1.Customer)
 ], Order.prototype, "customer", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => order_product_entity_1.OrderProduct, (orderProduct) => orderProduct.order),
+    (0, graphql_1.Field)(() => [product_entity_1.Product]),
+    (0, typeorm_1.ManyToMany)(() => product_entity_1.Product, (product) => product.orders),
+    (0, typeorm_1.JoinTable)(),
     __metadata("design:type", Array)
-], Order.prototype, "orderProducts", void 0);
+], Order.prototype, "products", void 0);
 exports.Order = Order = __decorate([
     (0, graphql_1.ObjectType)(),
     (0, typeorm_1.Entity)()

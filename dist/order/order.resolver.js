@@ -22,8 +22,13 @@ let OrderResolver = class OrderResolver {
     constructor(orderService) {
         this.orderService = orderService;
     }
-    async createOrder(input) {
-        return this.orderService.create(input);
+    async createOrder(createOrderDto) {
+        try {
+            return await this.orderService.create(createOrderDto);
+        }
+        catch (error) {
+            throw new Error(`Failed to create order: ${error.message}`);
+        }
     }
     async updateOrder(order_id, input) {
         return this.orderService.update(order_id, input);
@@ -38,22 +43,22 @@ let OrderResolver = class OrderResolver {
 exports.OrderResolver = OrderResolver;
 __decorate([
     (0, graphql_1.Mutation)(() => order_entity_1.Order),
-    __param(0, (0, graphql_1.Args)('input')),
+    __param(0, (0, graphql_1.Args)("createOrderDto")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_order_input_1.CreateOrderDto]),
     __metadata("design:returntype", Promise)
 ], OrderResolver.prototype, "createOrder", null);
 __decorate([
     (0, graphql_1.Mutation)(() => order_entity_1.Order),
-    __param(0, (0, graphql_1.Args)('order_id')),
-    __param(1, (0, graphql_1.Args)('input')),
+    __param(0, (0, graphql_1.Args)("order_id")),
+    __param(1, (0, graphql_1.Args)("input")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, update_order_input_1.UpdateOrderDto]),
     __metadata("design:returntype", Promise)
 ], OrderResolver.prototype, "updateOrder", null);
 __decorate([
     (0, graphql_1.Mutation)(() => Boolean),
-    __param(0, (0, graphql_1.Args)('order_id')),
+    __param(0, (0, graphql_1.Args)("order_id")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)

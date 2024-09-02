@@ -15,6 +15,7 @@ const order_module_1 = require("./order/order.module");
 const product_module_1 = require("./product/product.module");
 const path_1 = require("path");
 const apollo_1 = require("@nestjs/apollo");
+const order_product_module_1 = require("./order-product/order-product.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -22,22 +23,24 @@ exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
             typeorm_1.TypeOrmModule.forRoot({
-                type: 'postgres',
-                host: 'localhost',
+                type: "postgres",
+                host: "localhost",
                 port: 5432,
-                username: 'postgres',
-                password: 'postgres',
-                database: 'postgres',
-                entities: [__dirname + '/**/*.entity{.ts,.js}'],
+                username: "postgres",
+                password: "postgres",
+                database: "postgres",
+                entities: [__dirname + "/**/*.entity{.ts,.js}"],
                 synchronize: true,
+                logging: true,
             }),
             graphql_1.GraphQLModule.forRoot({
                 driver: apollo_1.ApolloDriver,
-                autoSchemaFile: (0, path_1.join)(process.cwd(), 'src/schema.gql'),
+                autoSchemaFile: (0, path_1.join)(process.cwd(), "src/schema.gql"),
             }),
-            customer_module_1.CustomerModule,
             order_module_1.OrderModule,
+            customer_module_1.CustomerModule,
             product_module_1.ProductModule,
+            order_product_module_1.OrderProductModule,
         ],
     })
 ], AppModule);

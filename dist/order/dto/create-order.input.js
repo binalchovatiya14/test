@@ -9,29 +9,45 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateOrderDto = void 0;
-const class_validator_1 = require("class-validator");
+exports.OrderProductInput = exports.CreateOrderDto = void 0;
 const graphql_1 = require("@nestjs/graphql");
+const class_transformer_1 = require("@nestjs/class-transformer");
 let CreateOrderDto = class CreateOrderDto {
 };
 exports.CreateOrderDto = CreateOrderDto;
 __decorate([
     (0, graphql_1.Field)(),
-    (0, class_validator_1.IsDate)(),
     __metadata("design:type", Date)
 ], CreateOrderDto.prototype, "order_date", void 0);
 __decorate([
     (0, graphql_1.Field)(),
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], CreateOrderDto.prototype, "status", void 0);
 __decorate([
     (0, graphql_1.Field)(),
-    (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", Number)
 ], CreateOrderDto.prototype, "customer_id", void 0);
+__decorate([
+    (0, graphql_1.Field)(() => [OrderProductInput]),
+    (0, class_transformer_1.Type)(() => OrderProductInput),
+    __metadata("design:type", Array)
+], CreateOrderDto.prototype, "products", void 0);
 exports.CreateOrderDto = CreateOrderDto = __decorate([
     (0, graphql_1.InputType)()
 ], CreateOrderDto);
+let OrderProductInput = class OrderProductInput {
+};
+exports.OrderProductInput = OrderProductInput;
+__decorate([
+    (0, graphql_1.Field)(),
+    __metadata("design:type", Number)
+], OrderProductInput.prototype, "product_id", void 0);
+__decorate([
+    (0, graphql_1.Field)(),
+    __metadata("design:type", Number)
+], OrderProductInput.prototype, "quantity", void 0);
+exports.OrderProductInput = OrderProductInput = __decorate([
+    (0, graphql_1.InputType)(),
+    (0, graphql_1.ObjectType)()
+], OrderProductInput);
 //# sourceMappingURL=create-order.input.js.map

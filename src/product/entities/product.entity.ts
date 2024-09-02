@@ -1,8 +1,14 @@
 // src/product/product.entity.ts
 
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
-import { ObjectType, Field } from '@nestjs/graphql';
-import { OrderProduct } from '../../order-product/entities/order-product.entity';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  ManyToMany,
+} from "typeorm";
+import { ObjectType, Field } from "@nestjs/graphql";
+import { Order } from "src/order/entities/order.entity";
 
 @ObjectType()
 @Entity()
@@ -12,17 +18,18 @@ export class Product {
   product_id: number;
 
   @Field()
-  @Column({ type: 'varchar' })
+  @Column({ type: "varchar" })
   name: string;
 
   @Field()
-  @Column('text')
+  @Column("text")
   description: string;
 
   @Field()
-  @Column('decimal')
+  @Column("decimal")
   price: number;
 
-  @OneToMany(() => OrderProduct, (orderProduct) => orderProduct.product)
-  orderProducts: OrderProduct[];
+  @Field(() => Order)
+  @ManyToMany(() => Order, (order) => order.products)
+  orders: Order[];
 }

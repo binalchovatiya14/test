@@ -1,32 +1,38 @@
 // src/order/order.resolver.ts
 
-import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
-import { Order } from './entities/order.entity';
-import { OrderService } from './order.service';
-import { CreateOrderDto } from './dto/create-order.input';
+import { Resolver, Query, Mutation, Args } from "@nestjs/graphql";
+import { Order } from "./entities/order.entity";
+import { OrderService } from "./order.service";
+import { CreateOrderDto } from "./dto/create-order.input";
 
-import { UpdateOrderDto } from './dto/update-order.input'; // Import the Update DTO
+import { UpdateOrderDto } from "./dto/update-order.input"; // Import the Update DTO
 
 @Resolver(() => Order)
 export class OrderResolver {
   constructor(private orderService: OrderService) {}
 
   @Mutation(() => Order)
-  async createOrder(@Args('input') input: CreateOrderDto): Promise<Order> {
-    return this.orderService.create(input);
+  async createOrder(
+    @Args("createOrderDto") createOrderDto: CreateOrderDto
+  ): Promise<Order> {
+    try {
+      return await this.orderService.create(createOrderDto);
+    } catch (error) {
+      throw new Error(`Failed to create order: ${error.message}`);
+    }
   }
 
   @Mutation(() => Order)
   async updateOrder(
-    @Args('order_id') order_id: number,
-    @Args('input') input: UpdateOrderDto, // Explicitly specify the type here
+    @Args("order_id") order_id: number,
+    @Args("input") input: UpdateOrderDto // Explicitly specify the type here
   ): Promise<Order> {
     return this.orderService.update(order_id, input);
   }
 
   @Mutation(() => Boolean)
   async deleteOrder(
-    @Args('order_id') order_id: number,
+    @Args("order_id") order_id: number
   ): Promise<{ success: boolean; message: string }> {
     return this.orderService.delete(order_id);
   }

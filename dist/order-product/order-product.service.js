@@ -9,21 +9,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrderProductService = void 0;
 const common_1 = require("@nestjs/common");
 let OrderProductService = class OrderProductService {
-    create(createOrderProductInput) {
-        return 'This action adds a new orderProduct';
-    }
-    findAll() {
-        return `This action returns all orderProduct`;
-    }
-    findOne(id) {
-        return `This action returns a #${id} orderProduct`;
-    }
-    update(id, updateOrderProductInput) {
-        return `This action updates a #${id} orderProduct`;
-    }
-    remove(id) {
-        return `This action removes a #${id} orderProduct`;
-    }
 };
 exports.OrderProductService = OrderProductService;
 exports.OrderProductService = OrderProductService = __decorate([

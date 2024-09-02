@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Product = void 0;
 const typeorm_1 = require("typeorm");
 const graphql_1 = require("@nestjs/graphql");
-const order_product_entity_1 = require("../../order-product/entities/order-product.entity");
+const order_entity_1 = require("../../order/entities/order.entity");
 let Product = class Product {
 };
 exports.Product = Product;
@@ -23,23 +23,24 @@ __decorate([
 ], Product.prototype, "product_id", void 0);
 __decorate([
     (0, graphql_1.Field)(),
-    (0, typeorm_1.Column)({ type: 'varchar' }),
+    (0, typeorm_1.Column)({ type: "varchar" }),
     __metadata("design:type", String)
 ], Product.prototype, "name", void 0);
 __decorate([
     (0, graphql_1.Field)(),
-    (0, typeorm_1.Column)('text'),
+    (0, typeorm_1.Column)("text"),
     __metadata("design:type", String)
 ], Product.prototype, "description", void 0);
 __decorate([
     (0, graphql_1.Field)(),
-    (0, typeorm_1.Column)('decimal'),
+    (0, typeorm_1.Column)("decimal"),
     __metadata("design:type", Number)
 ], Product.prototype, "price", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => order_product_entity_1.OrderProduct, (orderProduct) => orderProduct.product),
+    (0, graphql_1.Field)(() => order_entity_1.Order),
+    (0, typeorm_1.ManyToMany)(() => order_entity_1.Order, (order) => order.products),
     __metadata("design:type", Array)
-], Product.prototype, "orderProducts", void 0);
+], Product.prototype, "orders", void 0);
 exports.Product = Product = __decorate([
     (0, graphql_1.ObjectType)(),
     (0, typeorm_1.Entity)()

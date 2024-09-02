@@ -10,15 +10,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateOrderProductInput = void 0;
-const graphql_1 = require("@nestjs/graphql");
-let CreateOrderProductInput = class CreateOrderProductInput {
-};
+const class_validator_1 = require("class-validator");
+class CreateOrderProductInput {
+}
 exports.CreateOrderProductInput = CreateOrderProductInput;
 __decorate([
-    (0, graphql_1.Field)(() => graphql_1.Int, { description: 'Example field (placeholder)' }),
+    (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
-], CreateOrderProductInput.prototype, "exampleField", void 0);
-exports.CreateOrderProductInput = CreateOrderProductInput = __decorate([
-    (0, graphql_1.InputType)()
-], CreateOrderProductInput);
+], CreateOrderProductInput.prototype, "quantity", void 0);
 //# sourceMappingURL=create-order-product.input.js.map

@@ -7,13 +7,15 @@ type Product {
   name: String!
   description: String!
   price: Float!
+  orders: Order!
 }
 
 type Order {
   order_id: Float!
   order_date: DateTime!
   status: String!
-  customer: Customer
+  customer: Customer!
+  products: [Product!]!
 }
 
 """
@@ -32,21 +34,38 @@ type Customer {
 }
 
 type Query {
-  getCustomers: [Customer!]!
   getOrders: [Order!]!
+  getCustomers: [Customer!]!
   getProducts: [Product!]!
 }
 
 type Mutation {
+  createOrder(createOrderDto: CreateOrderDto!): Order!
+  updateOrder(order_id: Float!, input: UpdateOrderDto!): Order!
+  deleteOrder(order_id: Float!): Boolean!
   createCustomer(input: CreateCustomerDto!): Customer!
   updateCustomer(customer_id: Float!, input: CreateCustomerDto!): Customer!
   deleteCustomer(customer_id: Float!): Boolean!
-  createOrder(input: CreateOrderDto!): Order!
-  updateOrder(order_id: Float!, input: UpdateOrderDto!): Order!
-  deleteOrder(order_id: Float!): Boolean!
   createProduct(input: CreateProductDto!): Product!
   updateProduct(product_id: Float!, input: CreateProductDto!): Product!
   deleteProduct(product_id: Float!): Boolean!
+}
+
+input CreateOrderDto {
+  order_date: DateTime!
+  status: String!
+  customer_id: Float!
+  products: [OrderProductInput!]!
+}
+
+input OrderProductInput {
+  product_id: Float!
+  quantity: Float!
+}
+
+input UpdateOrderDto {
+  status: String
+  order_date: DateTime
 }
 
 input CreateCustomerDto {
@@ -55,17 +74,6 @@ input CreateCustomerDto {
   last_name: String!
   email: String!
   phone: String!
-}
-
-input CreateOrderDto {
-  order_date: DateTime!
-  status: String!
-  customer_id: Float!
-}
-
-input UpdateOrderDto {
-  status: String
-  order_date: DateTime
 }
 
 input CreateProductDto {

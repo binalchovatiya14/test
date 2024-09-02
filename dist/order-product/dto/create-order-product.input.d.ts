@@ -1,3 +1,5 @@
 export declare class CreateOrderProductInput {
-    exampleField: number;
+    product_id: number;
+    order_id: number;
+    quantity: number;
 }

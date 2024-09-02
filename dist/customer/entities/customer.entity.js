@@ -23,27 +23,27 @@ __decorate([
 ], Customer.prototype, "customer_id", void 0);
 __decorate([
     (0, graphql_1.Field)(),
-    (0, typeorm_1.Column)('text'),
+    (0, typeorm_1.Column)("text"),
     __metadata("design:type", String)
 ], Customer.prototype, "address", void 0);
 __decorate([
     (0, graphql_1.Field)(),
-    (0, typeorm_1.Column)({ type: 'varchar', length: 100 }),
+    (0, typeorm_1.Column)({ type: "varchar", length: 100 }),
     __metadata("design:type", String)
 ], Customer.prototype, "first_name", void 0);
 __decorate([
     (0, graphql_1.Field)(),
-    (0, typeorm_1.Column)({ type: 'varchar', length: 100 }),
+    (0, typeorm_1.Column)({ type: "varchar", length: 100 }),
     __metadata("design:type", String)
 ], Customer.prototype, "last_name", void 0);
 __decorate([
     (0, graphql_1.Field)(),
-    (0, typeorm_1.Column)({ type: 'varchar', unique: true }),
+    (0, typeorm_1.Column)({ type: "varchar", unique: true }),
     __metadata("design:type", String)
 ], Customer.prototype, "email", void 0);
 __decorate([
     (0, graphql_1.Field)(),
-    (0, typeorm_1.Column)({ type: 'varchar', length: 15 }),
+    (0, typeorm_1.Column)({ type: "varchar", length: 15 }),
     __metadata("design:type", String)
 ], Customer.prototype, "phone", void 0);
 __decorate([
